@@ -7,54 +7,39 @@
 [node name="Level" type="Node2D"]
 script = ExtResource("1_qyksv")
 
-[node name="PlayerStuff" type="Node2D" parent="."]
-
-[node name="PlayerBoid" type="Node2D" parent="PlayerStuff"]
+[node name="Ally1Boid" type="Node2D" parent="."]
 script = ExtResource("1_kkn1f")
+target_min_radius = 0.0
+target_max_radius = 10.0
 movement_speed = 50.0
 
-[node name="Player" type="Sprite2D" parent="PlayerStuff"]
+[node name="Ally2Boid" type="Node2D" parent="."]
+script = ExtResource("1_kkn1f")
+target_min_radius = 0.0
+target_max_radius = 10.0
+movement_speed = 50.0
+
+[node name="Ally3Boid" type="Node2D" parent="."]
+script = ExtResource("1_kkn1f")
+target_min_radius = 0.0
+target_max_radius = 10.0
+movement_speed = 50.0
+
+[node name="Player" type="Sprite2D" parent="."]
 position = Vector2(564, 250)
 texture = ExtResource("1_xkykf")
 
-[node name="Ally1" type="Sprite2D" parent="PlayerStuff"]
+[node name="Ally1" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(111, 250)
 texture = ExtResource("1_xkykf")
 
-[node name="Ally2" type="Sprite2D" parent="PlayerStuff"]
+[node name="Ally2" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 1, 1)
-position = Vector2(267, 250)
+position = Vector2(243, 384)
 texture = ExtResource("1_xkykf")
 
-[node name="EnemyGroup1" type="Node2D" parent="."]
-
-[node name="EnemyBoid1" type="Node2D" parent="EnemyGroup1"]
-script = ExtResource("1_kkn1f")
-movement_speed = 100.0
-
-[node name="Enemy1" type="Sprite2D" parent="EnemyGroup1"]
+[node name="Ally3" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
-position = Vector2(1043, 250)
-texture = ExtResource("1_xkykf")
-
-[node name="Enemy2" type="Sprite2D" parent="EnemyGroup1"]
-modulate = Color(0.482353, 0, 0, 1)
-position = Vector2(892, 252)
-texture = ExtResource("1_xkykf")
-
-[node name="EnemyGroup2" type="Node2D" parent="."]
-
-[node name="EnemyBoid2" type="Node2D" parent="EnemyGroup2"]
-script = ExtResource("1_kkn1f")
-movement_speed = 150.0
-
-[node name="Enemy1" type="Sprite2D" parent="EnemyGroup2"]
-modulate = Color(1, 0, 0.47451, 1)
-position = Vector2(572, 638)
-texture = ExtResource("1_xkykf")
-
-[node name="Enemy2" type="Sprite2D" parent="EnemyGroup2"]
-modulate = Color(0.517647, 0, 0.52549, 1)
-position = Vector2(569, 494)
+position = Vector2(97, 415)
 texture = ExtResource("1_xkykf")

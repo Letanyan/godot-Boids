@@ -1,48 +1,51 @@
 extends Node2D
 
-@onready var player_boid: Boid = $PlayerStuff/PlayerBoid
-@onready var player: Sprite2D = $PlayerStuff/Player
+@onready var player: Sprite2D = $Player
 var player_velocity := Vector2.ZERO
 
-@onready var enemy_boid1: Boid = $EnemyGroup1/EnemyBoid1
-@onready var enemy_boid2: Boid = $EnemyGroup2/EnemyBoid2
+@onready var ally1boid: Boid = $Ally1Boid
+@onready var ally2boid: Boid = $Ally2Boid
+@onready var ally3boid: Boid = $Ally3Boid
+
+var random_positions_for_each_ally := PackedVector2Array([])
 
 func _ready() -> void:
+	# generate positions for allies around player
+	random_positions_for_each_ally.append(Vector2.UP.rotated(randf() * 2 * PI) * 200)
+	random_positions_for_each_ally.append(Vector2.UP.rotated(randf() * 2 * PI) * 200)
+	random_positions_for_each_ally.append(Vector2.UP.rotated(randf() * 2 * PI) * 200)
+	
 	# setup the entities each boid will manage and their obstacles
-	player_boid.entities.append($PlayerStuff/Ally1)
-	player_boid.entities.append($PlayerStuff/Ally2)
-	player_boid.obstacles.append($EnemyGroup1/Enemy1)
-	player_boid.obstacles.append($EnemyGroup1/Enemy2)
-	player_boid.obstacles.append($EnemyGroup2/Enemy1)
-	player_boid.obstacles.append($EnemyGroup2/Enemy2)
+	ally1boid.entities.append($Ally1)
+	ally1boid.obstacles.append($Ally2)
+	ally1boid.obstacles.append($Ally3)
+	ally1boid.obstacles.append($Player)
 	
-	enemy_boid1.entities.append($EnemyGroup1/Enemy1)
-	enemy_boid1.entities.append($EnemyGroup1/Enemy2)
-	enemy_boid1.obstacles.append($PlayerStuff/Ally1)
-	enemy_boid1.obstacles.append($PlayerStuff/Ally2)
-	enemy_boid1.obstacles.append($EnemyGroup2/Enemy1)
-	enemy_boid1.obstacles.append($EnemyGroup2/Enemy2)
+	ally2boid.entities.append($Ally2)
+	ally2boid.obstacles.append($Ally1)
+	ally2boid.obstacles.append($Ally3)
+	ally2boid.obstacles.append($Player)
 	
-	enemy_boid2.entities.append($EnemyGroup2/Enemy1)
-	enemy_boid2.entities.append($EnemyGroup2/Enemy2)
-	enemy_boid2.obstacles.append($PlayerStuff/Ally1)
-	enemy_boid2.obstacles.append($PlayerStuff/Ally2)
-	enemy_boid2.obstacles.append($EnemyGroup1/Enemy1)
-	enemy_boid2.obstacles.append($EnemyGroup1/Enemy2)
+	ally3boid.entities.append($Ally3)
+	ally3boid.obstacles.append($Ally2)
+	ally3boid.obstacles.append($Ally1)
+	ally3boid.obstacles.append($Player)	
 
 func _physics_process(delta: float) -> void:
 	# update player boid
 	player.position += player_velocity * 150 * delta
-	player_boid.target = player.position
-	player_boid.update_positions(delta)
+	
+	# update ally 1
+	ally1boid.target = player.position + random_positions_for_each_ally[0]
+	ally1boid.update_positions(delta)
 	
 	# update group 1 boid
-	enemy_boid1.target = player.position
-	enemy_boid1.update_positions(delta)
+	ally2boid.target = player.position + random_positions_for_each_ally[1]
+	ally2boid.update_positions(delta)
 	
 	# update group 2 boid
-	enemy_boid2.target = player.position
-	enemy_boid2.update_positions(delta)
+	ally3boid.target = player.position + random_positions_for_each_ally[2]
+	ally3boid.update_positions(delta)
 	
 
 func _input(event: InputEvent) -> void:
