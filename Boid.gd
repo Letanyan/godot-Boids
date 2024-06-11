@@ -63,8 +63,11 @@ func update_positions(delta: float) -> void:
 			if distance < seperation_radius:
 				movement += (entity.position - obstacles[j].position).normalized()
 			
-		# if the movement is small enough we ignore it
-		movements[i] = movement.normalized()
+		if movement.is_zero_approx():			
+			movements[i] = Vector2(randf(), randf()).normalized() * 0.1 # we use jitter to help stop entites getting stuck
+		else:
+			movements[i] = movement.normalized()
+			
 		
 	
 	# update the positions for all entities after the above calculation are complete

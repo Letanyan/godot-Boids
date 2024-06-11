@@ -7,6 +7,29 @@ var player_velocity := Vector2.ZERO
 @onready var enemy_boid1: Boid = $EnemyGroup1/EnemyBoid1
 @onready var enemy_boid2: Boid = $EnemyGroup2/EnemyBoid2
 
+func _ready() -> void:
+	# setup the entities each boid will manage and their obstacles
+	player_boid.entities.append($PlayerStuff/Ally1)
+	player_boid.entities.append($PlayerStuff/Ally2)
+	player_boid.obstacles.append($EnemyGroup1/Enemy1)
+	player_boid.obstacles.append($EnemyGroup1/Enemy2)
+	player_boid.obstacles.append($EnemyGroup2/Enemy1)
+	player_boid.obstacles.append($EnemyGroup2/Enemy2)
+	
+	enemy_boid1.entities.append($EnemyGroup1/Enemy1)
+	enemy_boid1.entities.append($EnemyGroup1/Enemy2)
+	enemy_boid1.obstacles.append($PlayerStuff/Ally1)
+	enemy_boid1.obstacles.append($PlayerStuff/Ally2)
+	enemy_boid1.obstacles.append($EnemyGroup2/Enemy1)
+	enemy_boid1.obstacles.append($EnemyGroup2/Enemy2)
+	
+	enemy_boid2.entities.append($EnemyGroup2/Enemy1)
+	enemy_boid2.entities.append($EnemyGroup2/Enemy2)
+	enemy_boid2.obstacles.append($PlayerStuff/Ally1)
+	enemy_boid2.obstacles.append($PlayerStuff/Ally2)
+	enemy_boid2.obstacles.append($EnemyGroup1/Enemy1)
+	enemy_boid2.obstacles.append($EnemyGroup1/Enemy2)
+
 func _physics_process(delta: float) -> void:
 	# update player boid
 	player.position += player_velocity * 150 * delta
