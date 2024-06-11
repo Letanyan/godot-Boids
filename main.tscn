@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccpuoibslaqcv"]
+
+[ext_resource type="Script" path="res://Boid.gd" id="1_kkn1f"]
+[ext_resource type="Script" path="res://main.gd" id="1_qyksv"]
+[ext_resource type="Texture2D" uid="uid://bs37i4ur4p04w" path="res://icon.svg" id="1_xkykf"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_qyksv")
+
+[node name="PlayerStuff" type="Node2D" parent="."]
+
+[node name="PlayerBoid" type="Node2D" parent="PlayerStuff" node_paths=PackedStringArray("entities", "obstacles")]
+script = ExtResource("1_kkn1f")
+entities = [NodePath("../Ally1"), NodePath("../Ally2")]
+obstacles = [NodePath("../../EnemyGroup1/Enemy1"), NodePath("../../EnemyGroup1/Enemy2"), NodePath("../../EnemyGroup2/Enemy1"), NodePath("../../EnemyGroup2/Enemy2")]
+movement_speed = 50.0
+
+[node name="Player" type="Sprite2D" parent="PlayerStuff"]
+position = Vector2(564, 253)
+texture = ExtResource("1_xkykf")
+
+[node name="Ally1" type="Sprite2D" parent="PlayerStuff"]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(106, 455)
+texture = ExtResource("1_xkykf")
+
+[node name="Ally2" type="Sprite2D" parent="PlayerStuff"]
+modulate = Color(0, 0, 1, 1)
+position = Vector2(216, 288)
+texture = ExtResource("1_xkykf")
+
+[node name="EnemyGroup1" type="Node2D" parent="."]
+
+[node name="EnemyBoid1" type="Node2D" parent="EnemyGroup1" node_paths=PackedStringArray("entities", "obstacles")]
+script = ExtResource("1_kkn1f")
+entities = [NodePath("../Enemy1"), NodePath("../Enemy2")]
+obstacles = [NodePath("../../PlayerStuff/Ally1"), NodePath("../../PlayerStuff/Ally2"), NodePath("../../EnemyGroup2/Enemy1"), NodePath("../../EnemyGroup2/Enemy2")]
+movement_speed = 100.0
+
+[node name="Enemy1" type="Sprite2D" parent="EnemyGroup1"]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(1068, 79)
+texture = ExtResource("1_xkykf")
+
+[node name="Enemy2" type="Sprite2D" parent="EnemyGroup1"]
+modulate = Color(0.482353, 0, 0, 1)
+position = Vector2(921, 84)
+texture = ExtResource("1_xkykf")
+
+[node name="EnemyGroup2" type="Node2D" parent="."]
+
+[node name="EnemyBoid2" type="Node2D" parent="EnemyGroup2" node_paths=PackedStringArray("entities", "obstacles")]
+script = ExtResource("1_kkn1f")
+entities = [NodePath("../Enemy1"), NodePath("../Enemy2")]
+obstacles = [NodePath("../../PlayerStuff/Ally1"), NodePath("../../PlayerStuff/Ally2"), NodePath("../../EnemyGroup1/Enemy1"), NodePath("../../EnemyGroup1/Enemy2")]
+movement_speed = 150.0
+
+[node name="Enemy1" type="Sprite2D" parent="EnemyGroup2"]
+modulate = Color(1, 0, 0.47451, 1)
+position = Vector2(1055, 429)
+texture = ExtResource("1_xkykf")
+
+[node name="Enemy2" type="Sprite2D" parent="EnemyGroup2"]
+modulate = Color(0.517647, 0, 0.52549, 1)
+position = Vector2(88, 94)
+texture = ExtResource("1_xkykf")
